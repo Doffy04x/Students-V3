@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Autre Utilisateurs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin-top: 20px;
+            background-color: #f2f6fc;
+            color: #69707a;
+        }
+        .img-account-profile {
+            height: 10rem;
+        }
+        .rounded-circle {
+            border-radius: 50% !important;
+        }
+        .card {
+            box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+        }
+        .card .card-header {
+            font-weight: 500;
+        }
+        .card-header:first-child {
+            border-radius: 0.35rem 0.35rem 0 0;
+        }
+        .card-header {
+            padding: 1rem 1.35rem;
+            margin-bottom: 0;
+            background-color: rgba(33, 40, 50, 0.03);
+            border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+        }
+        .form-control, .dataTable-input {
+            display: block;
+            width: 100%;
+            padding: 0.875rem 1.125rem;
+            font-size: 0.875rem;
+            font-weight: 400;
+            line-height: 1;
+            color: #69707a;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #c5ccd6;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border-radius: 0.35rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .nav-borders .nav-link.active {
+            color: #0061f2;
+            border-bottom-color: #0061f2;
+        }
+        .nav-borders .nav-link {
+            color: #69707a;
+            border-bottom-width: 0.125rem;
+            border-bottom-style: solid;
+            border-bottom-color: transparent;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+        /* Additional styles for the other users page */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+        .user-profile img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        .user-info {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+
+        <nav class="nav nav-borders">
+            <a class="nav-link ms-0" href="account.html">Profile</a>
+            <a class="nav-link active" href="users.html">Autre Utilisateurs</a>
+           
+            <a class="nav-link" href="javascript:void(0);" id="signOutButton">Se déconnecter</a>
+        </nav>
+        
+
+
+        <nav class="nav nav-borders d-flex justify-content-between">
+            <div class="d-flex justify-content-between w-100">
+                
+            </div>
+            <div id="searchOptions" class="search-container d-flex" style="display: none;">
+                <!-- Filiere Dropdown -->
+                <select id="inputFiliere" class="form-control mr-2">
+                    <option value="">Toutes les filliéres</option>
+                    <option value="Informatique">Informatique</option>
+                    <option value="Mathématique">Mathématique</option>
+                    <option value="Physique">Physique</option>
+                    <option value="Anglais">Anglais</option>
+                    <option value="Francais">Francais</option>
+                    <option value="Arabe">Arabe</option>  
+                </select>
+        
+                <!-- Promotion Dropdown -->
+                <select id="inputPromotion" class="form-control mr-2">
+                    <option value="">Toutes les promotions</option>
+                    <option value="S1">S1</option>
+                    <option value="s2">S2</option>
+                    <option value="s3">S3</option>
+                    <option value="s4">S4</option>
+                    <option value="s5">S5</option>
+                    <option value="s6">S6</option>                
+                </select>
+        
+                <button id="searchButton" class="btn btn-primary">Rechercher</button>
+            </div>
+        </nav>
+        
+        
+
+
+       
+        
+        <p></p>
+        <p></p>
+        <div id="usersContainer"></div>
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+    <script>
+document.getElementById('signOutButton').addEventListener('click', function() {
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful, redirect to index.html
+        window.location.href = 'index.html';
+    }).catch(function(error) {
+        // An error happened during sign out
+        console.error("Error signing out: ", error);
+    });
+});
+
+
+          var firebaseConfig = {
+        apiKey: "AIzaSyDs2gZJ6wIRDOqEtzyIT7toug3Xs3-_w1E",
+    authDomain: "user-7c7f8.firebaseapp.com",
+    projectId: "user-7c7f8",
+    storageBucket: "user-7c7f8.appspot.com",
+    messagingSenderId: "55544751979",
+    appId: "1:55544751979:web:40366cb78cb1cf8162ce2e",
+    measurementId: "G-FP9KRJ1GV3"
+          }
+        firebase.initializeApp(firebaseConfig);
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                firebase.database().ref('users').once('value').then(function(snapshot) {
+                    const usersContainer = document.getElementById('usersContainer');
+                    snapshot.forEach(function(userSnapshot) {
+                        var userData = userSnapshot.val();
+                        var userDiv = document.createElement('div');
+                        userDiv.className = 'user-profile';
+                        userDiv.innerHTML = `
+                            <img src="${userData.profileImageUrl || 'http://bootdey.com/img/Content/avatar/avatar1.png'}" alt="Profile Picture">
+                            <div class="user-info">
+                                <p><strong>Nom D'Utilisateur:</strong> ${userData.username || 'N/A'}</p>
+                                <p><strong>Nom complet:</strong> ${userData.firstName || ''} ${userData.lastName || ''}</p>
+                                <p><strong>Genre:</strong> ${userData.gender || 'N/A'}</p>
+                                <p><strong>Date de Naissance:</strong> ${userData.birthDate || 'N/A'}</p>
+                                <p><strong>Lieu de Naissance:</strong> ${userData.birthPlace || 'N/A'}</p>
+                               
+
+
+                            </div>
+                        `;
+                        usersContainer.appendChild(userDiv);
+                    });
+                }).catch(function(error) {
+                    console.log("Error fetching user data:", error);
+                });
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+      
+
+
+        document.getElementById('searchButton').addEventListener('click', function() {
+    var selectedFiliere = document.getElementById('inputFiliere').value;
+    var selectedPromotion = document.getElementById('inputPromotion').value;
+
+    firebase.database().ref('users').once('value').then(function(snapshot) {
+        const usersContainer = document.getElementById('usersContainer');
+        usersContainer.innerHTML = ''; // Clear previous results
+        snapshot.forEach(function(userSnapshot) {
+            var userData = userSnapshot.val();
+            if ((selectedFiliere === '' || userData.filiere === selectedFiliere) &&
+                (selectedPromotion === '' || userData.promotion === selectedPromotion)) {
+                // Create and append user profile elements here as before
+                var userDiv = document.createElement('div');
+                userDiv.className = 'user-profile';
+                userDiv.innerHTML = `
+                    <img src="${userData.profileImageUrl || 'http://bootdey.com/img/Content/avatar/avatar1.png'}" alt="Profile Picture">
+                    <div class="user-info">
+                        <p><strong>Nom D'Utilisateur:</strong> ${userData.username || 'N/A'}</p>
+                        <p><strong>Nom complet:</strong> ${userData.firstName || ''} ${userData.lastName || ''}</p>
+                        <p><strong>Genre:</strong> ${userData.gender || 'N/A'}</p>
+                        <p><strong>Date de Naissance:</strong> ${userData.birthDate || 'N/A'}</p>
+                        <p><strong>Lieu de Naissance:</strong> ${userData.birthPlace || 'N/A'}</p>
+                        
+
+                    </div>
+                `;
+                usersContainer.appendChild(userDiv);
+            }
+        });
+    }).catch(function(error) {
+        console.log("Error fetching user data:", error);
+    });
+});
+
+
+    </script>
+</body>
+</html>
