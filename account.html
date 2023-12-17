@@ -72,7 +72,7 @@ color:#69707a;
 <div class="container-xl px-4 mt-4">
     <!-- Navigation Tabs -->
     <nav class="nav nav-borders">
-        <a class="nav-link ms-0 active"  href="account.html">Profil</a>
+        <a class="nav-link ms-0 active"  href="account.html">Profile</a>
         <a class="nav-link " href="users.html">Autre Utilisateurs</a>
 
         <a class="nav-link" href="javascript:void(0);" id="signOutButton">Se déconnecter</a>
@@ -144,24 +144,82 @@ color:#69707a;
                                     </select>
                                 </div>
                                 
-                                
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="inputPhone">Phone number</label>
-                                    <input class="form-control" id="inputPhone" type="tel" placeholder="Entrer votre numéro de téléphone" value=""required>
-                                </div>
+                                    <label class="small mb-1" for="inputAge">Age</label>
+                                    <input class="form-control" id="inputAge" type="text" placeholder="Entrer votre Age actuelle" value="" required>
+                                    </div>
+                                
+                                
                             </div>
 
                             <div class="row gx-3 mb-3">
 
-                                <div class="col-md-6">
-                                <label class="small mb-1" for="inputEcole">Ecole</label>
-                                <input class="form-control" id="inputEcole" type="text" placeholder="Entrer votre Ecole actuelle" value=""required>
-                                </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputEmail">Address Email</label>
+                                <input class="form-control" id="inputEmail" type="tel" placeholder="Entrer votre address email" value=""required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputPhone">Numéro de Téléphone</label>
+                                <input class="form-control" id="inputPhone" type="tel" placeholder="Entrer votre numéro de téléphone" value=""required>
+                            </div>
+
+                            </div>
+
+                            <div class="row gx-3 mb-3">
+
                                 
                                 <div class="col-md-6">
-                                <label class="small mb-1" for="inputAge">Age</label>
-                                <input class="form-control" id="inputAge" type="text" placeholder="Entrer votre Age actuelle" value="" required>
+                                    <label class="small mb-1" for="inputVille">Ville Actulle</label>
+                                    <select class="form-control" id="inputVille" name="Ville" required>
+                                        <option value="Casablanca">Casablanca</option>
+                                        <option value="Marrakech">Marrakech</option>
+                                        <option value="Rabat">Rabat</option>
+                                        <option value="Fes (Fez)">Fes (Fez)</option>
+                                        <option value="Tangier">Tangier</option>
+                                        <option value="Agadir">Agadir</option>
+                                        <option value="Meknes">Meknes</option>
+                                        <option value="Oujda">Oujda</option>
+                                        <option value="Kenitra">Kenitra</option>
+                                        <option value="Tetouan">Tetouan</option>
+                                        <option value="Safi">Safi</option>
+                                        <option value="Laayoune">Laayoune</option>
+                                        <option value="Nador">Nador</option>
+                                        <option value="Al Hoceima">Al Hoceima</option>
+                                        <option value="Beni Mellal">Beni Mellal</option>
+                                        <option value="Taza">Taza</option>
+                                        <option value="Settat">Settat</option>
+                                        <option value="Khouribga">Khouribga</option>
+                                        <option value="El Jadida">El Jadida</option>
+                                        <option value="Errachidia">Errachidia</option>
+                                        
+
+                                    </select>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputEcole">Ecole</label>
+                                    <select class="form-control" id="inputEcole" name="Ecole" required>
+                                        <option value="ENS">ENS</option>
+                                        <option value="ENSA ">ENSA </option>
+                                        <option value="ENCG ">ENCG </option>
+                                        <option value="EHTP ">EHTP </option>
+                                        <option value="ENSIAS ">ENSIAS </option>
+                                        <option value="INSEA ">INSEA </option>
+                                        <option value="ISCAE  ">ISCAE  </option>
+                                        <option value="EMI  ">EMI  </option>
+                                        <option value="ENSMR  ">ENSMR  </option>
+                                        <option value="ENSAM  ">ENSAM  </option>
+                                        <option value="ENSP  ">ENSP  </option>
+                                        <option value="ENSEM  ">ENSEM  </option>
+                                        <option value="ENSAH  ">ENSAH  </option>
+                                        <option value="ENSET  ">ENSET  </option>
+                                        <option value="FST  ">FST  </option>
+
+                                    </select>
+                                </div>
+                                
+                                
                             </div>
 
 
@@ -283,6 +341,10 @@ color:#69707a;
     var filiere = document.getElementById('inputFiliere').value;
     var Age = document.getElementById('inputAge').value;
     var Ecole = document.getElementById('inputEcole').value;
+    var Email = document.getElementById('inputEmail').value;
+    var Ville = document.getElementById('inputVille').value;
+
+
 
 
     // Handle image file upload
@@ -303,6 +365,8 @@ color:#69707a;
                 birthDate: birthDate,
                 Ecole:Ecole,
                 Age:Age,
+                Email:Email,
+                Ville:Ville,
                 profileImageUrl: imageURL
             });
         }).catch(error => {
@@ -322,6 +386,8 @@ color:#69707a;
             filiere:filiere,
             Age:Age,
             Ecole:Ecole,
+            Email:Email,
+            Ville:Ville,
             promotion:promotion
             // Do not update imageURL if no new image is uploaded
         });
@@ -430,6 +496,10 @@ function displayMessage(message, type) {
             document.getElementById('inputFiliere').value = userData.filiere || '';
             document.getElementById('inputEcole').value = userData.Ecole || '';
             document.getElementById('inputAge').value = userData.Age || '';
+            document.getElementById('inputVille').value = userData.Ville || '';
+            document.getElementById('inputEmail').value = userData.Email || '';
+
+
 
 
 
