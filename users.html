@@ -90,7 +90,7 @@
     <div class="container mt-4">
 
         <nav class="nav nav-borders">
-            <a class="nav-link ms-0" href="account.html">Profil</a>
+            <a class="nav-link ms-0" href="account.html">Profile</a>
             <a class="nav-link active" href="users.html">Autre Utilisateurs</a>
            
             <a class="nav-link" href="javascript:void(0);" id="signOutButton">Se déconnecter</a>
@@ -103,6 +103,48 @@
                 
             </div>
             <div id="searchOptions" class="search-container d-flex" style="display: none;">
+                <select id="inputVille" class="form-control mr-2">
+                    <option value="">Toutes les villes</option>
+                    <option value="Casablanca">Casablanca</option>
+                    <option value="Marrakech">Marrakech</option>
+                    <option value="Rabat">Rabat</option>
+                    <option value="Fes (Fez)">Fes (Fez)</option>
+                    <option value="Tangier">Tangier</option>
+                    <option value="Agadir">Agadir</option>
+                    <option value="Meknes">Meknes</option>
+                    <option value="Oujda">Oujda</option>
+                    <option value="Kenitra">Kenitra</option>
+                    <option value="Tetouan">Tetouan</option>
+                    <option value="Safi">Safi</option>
+                    <option value="Laayoune">Laayoune</option>
+                    <option value="Nador">Nador</option>
+                    <option value="Al Hoceima">Al Hoceima</option>
+                    <option value="Beni Mellal">Beni Mellal</option>
+                    <option value="Taza">Taza</option>
+                    <option value="Settat">Settat</option>
+                    <option value="Khouribga">Khouribga</option>
+                    <option value="El Jadida">El Jadida</option>
+                    <option value="Errachidia">Errachidia</option> 
+                </select>
+
+                <select id="inputEcole" class="form-control mr-2">
+                    <option value="">Toutes les ecoles</option>
+                    <option value="ENS">ENS</option>
+                    <option value="ENSA ">ENSA </option>
+                    <option value="ENCG ">ENCG </option>
+                    <option value="EHTP ">EHTP </option>
+                    <option value="ENSIAS ">ENSIAS </option>
+                    <option value="INSEA ">INSEA </option>
+                    <option value="ISCAE  ">ISCAE  </option>
+                    <option value="EMI  ">EMI  </option>
+                    <option value="ENSMR  ">ENSMR  </option>
+                    <option value="ENSAM  ">ENSAM  </option>
+                    <option value="ENSP  ">ENSP  </option>
+                    <option value="ENSEM  ">ENSEM  </option>
+                    <option value="ENSAH  ">ENSAH  </option>
+                    <option value="ENSET  ">ENSET  </option>
+                    <option value="FST  ">FST  </option>
+                </select>
                 <!-- Filiere Dropdown -->
                 <select id="inputFiliere" class="form-control mr-2">
                     <option value="">Toutes les filliéres</option>
@@ -179,9 +221,13 @@ document.getElementById('signOutButton').addEventListener('click', function() {
                             <div class="user-info">
                                 <p><strong>Nom D'Utilisateur:</strong> ${userData.username || 'N/A'}</p>
                                 <p><strong>Nom complet:</strong> ${userData.firstName || ''} ${userData.lastName || ''}</p>
+                                <p><strong>Address Email:</strong> ${userData.Email || 'N/A'}</p>
                                 <p><strong>Genre:</strong> ${userData.gender || 'N/A'}</p>
                                 <p><strong>Date de Naissance:</strong> ${userData.birthDate || 'N/A'}</p>
                                 <p><strong>Lieu de Naissance:</strong> ${userData.birthPlace || 'N/A'}</p>
+                                <p><strong>Ville actuelle:</strong> ${userData.Ville || 'N/A'}</p>
+                                <p><strong>Ecole actuelle:</strong> ${userData.Ecole || 'N/A'}</p>
+
                                
 
 
