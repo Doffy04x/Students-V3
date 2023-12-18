@@ -69,10 +69,16 @@
         firebase.initializeApp(firebaseConfig);
 
         document.getElementById('register-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+        event.preventDefault();
 
-    var email = document.querySelector('input[name="email"]').value;
-    var password = document.querySelector('input[name="pass"]').value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('pass').value;
+        var allowedDomains = ['gmail.com', 'outlook.com', 'yahoo.com', 'icloud.com', 'aol.com', 'um5.ac.ma','zoho.com', 'protonmail.com', 'tutanota.com', 'yandex.com', 'gmx.com'];
+        var emailDomain = email.substring(email.lastIndexOf("@") + 1);
+        if (allowedDomains.indexOf(emailDomain) === -1) {
+            showMessage('For enhanced reliability and security, we kindly request that you register using an established email service provider such as Gmail, Outlook, etc.', 'error');
+            return;
+        }
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
 .then(function(userCredential) {
