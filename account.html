@@ -66,14 +66,30 @@ color:#69707a;
     margin-left: 1rem;
     margin-right: 1rem;
 }
+.footer {
+  color: #69707a;
+  text-align: center;
+  padding: 10px 0;
+  position: absolute;
+  bottom: 20;
+  width: 100%;
+  border-top: 1px solid #c5ccd6;
+}
+
+.footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
     </style>
     </head>
 <body>
 <div class="container-xl px-4 mt-4">
-    <!-- Navigation Tabs -->
+
     <nav class="nav nav-borders">
         <a class="nav-link ms-0 active"  href="account.html">Profile</a>
-        <a class="nav-link " href="users.html">Autres Utilisateurs</a>
+        <a class="nav-link " href="users.html">Autre Utilisateurs</a>
 
         <a class="nav-link" href="javascript:void(0);" id="signOutButton">Se déconnecter</a>
     </nav>    
@@ -82,9 +98,8 @@ color:#69707a;
 
     <hr class="mt-0 mb-4">
 
-    <!-- Profile Form -->
+
     <form id="profile-form">
-        <!-- Profile Image Section -->
         <div class="row mb-3">
             <div class="col-xl-4">
                 <div class="card mb-4 mb-xl-0">
@@ -97,18 +112,18 @@ color:#69707a;
                 </div>
             </div>
 
-            <!-- Account Details Section -->
+
             <div class="col-xl-8">
                 <div class="card mb-4">
                     <div class="card-header">Détails du compte</div>
                     <div class="card-body">
-                        <!-- Username -->
+
                         <div class="mb-3">
                             <label class="small mb-1" for="inputUsername">Nom D'Utilisateur</label>
                             <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username">
                         </div>
 
-                        <!-- Name Fields -->
+
                         <div class="row gx-3 mb-3">
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputFirstName">Nom</label>
@@ -268,8 +283,8 @@ color:#69707a;
                             </div>
                                 
                             </div>
-                        <!-- Submit Button -->
-                        <div class="col-md-6">
+
+                            <div class="col-md-6">
                             <button class="btn btn-primary" type="submit">Save changes</button>
                             <div id="success-message" class="text-success mt-2 d-none">Saved successfully</div>
                         </div>
@@ -283,6 +298,13 @@ color:#69707a;
     </form>
 </div>
 
+<footer class="footer">
+    <div class="container">
+        <span>&copy; 2023 Unes Bhs . All Rights Reserved.</span>
+        <span>Created by  ♛ Younes Benelhoms ♛.</span>
+    </div>
+</footer>
+
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
@@ -294,27 +316,25 @@ color:#69707a;
 <script>
     document.getElementById('signOutButton').addEventListener('click', function() {
     firebase.auth().signOut().then(function() {
-        // Sign-out successful, redirect to index.html
+
         window.location.href = 'index.html';
     }).catch(function(error) {
-        // An error happened during sign out
+
         console.error("Error signing out: ", error);
     });
 });
-    // Firebase configuration
-    var firebaseConfig = {
-        apiKey: "AIzaSyDs2gZJ6wIRDOqEtzyIT7toug3Xs3-_w1E",
+
+var firebaseConfig = {
+    apiKey: "AIzaSyDs2gZJ6wIRDOqEtzyIT7toug3Xs3-_w1E",
     authDomain: "user-7c7f8.firebaseapp.com",
     projectId: "user-7c7f8",
     storageBucket: "user-7c7f8.appspot.com",
     messagingSenderId: "55544751979",
     appId: "1:55544751979:web:40366cb78cb1cf8162ce2e",
     measurementId: "G-FP9KRJ1GV3"
-    };
-    // Initialize Firebase
+};
     firebase.initializeApp(firebaseConfig);
 
-    // User Authentication Check
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             getUserProfile(user.uid);
@@ -323,11 +343,11 @@ color:#69707a;
         }
     });
 
-    // Form Submission and Image Upload
+
     document.getElementById('profile-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Capture form data
+
     var username = document.getElementById('inputUsername').value;
     var firstName = document.getElementById('inputFirstName').value;
     var lastName = document.getElementById('inputLastName').value;
@@ -347,7 +367,7 @@ color:#69707a;
 
 
 
-    // Handle image file upload
+
     var imageFile = document.getElementById('profile-image-input').files[0];
     if(imageFile) {
         uploadImageToFirebase(imageFile).then(imageURL => {
@@ -389,14 +409,13 @@ color:#69707a;
             Email:Email,
             Ville:Ville,
             promotion:promotion
-            // Do not update imageURL if no new image is uploaded
         });
     }
 });
 
 
-    // Image Upload Function
-    function uploadImageToFirebase(imageFile) {
+
+function uploadImageToFirebase(imageFile) {
         return new Promise((resolve, reject) => {
             var storageRef = firebase.storage().ref('profile_images/' + imageFile.name);
             storageRef.put(imageFile).then(function(snapshot) {
@@ -409,18 +428,14 @@ color:#69707a;
         });
     }
 
-    // Save User Profile Function
-    // Firebase initialization
-// Make sure you've initialized Firebase here
-
-// Check user authentication
+    
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-        // User is signed in
+
         console.log("User is signed in.");
-        // Continue with your profile data retrieval and other logic
+
     } else {
-        // No user is signed in, redirect to index.html
+
         window.location.href = 'index.html';
     }
 });
@@ -428,30 +443,30 @@ firebase.auth().onAuthStateChanged(function(user) {
 function saveUserProfile(userData) {
     var user = firebase.auth().currentUser;
     if (user) {
-        console.log("Saving user profile for user:", user.uid); // Log for debugging
-        console.log("User data being saved:", userData); // Log the data being saved
+        console.log("Saving user profile for user:", user.uid); 
+        console.log("User data being saved:", userData); 
 
-        // Using Firebase Realtime Database
+
         return firebase.database().ref('users/' + user.uid).set(userData)
             .then(function() {
                 console.log("User profile saved successfully!");
 
-                // Show the success message
+
                 var successMessage = document.getElementById('success-message');
                 successMessage.classList.remove('d-none');
 
-                // Reset the message after 3 seconds (you can adjust the delay as needed)
+
                 setTimeout(function() {
                     successMessage.classList.add('d-none');
 
-                    // Redirect to account.html
+
                     window.location.href = 'account.html';
-                }, 3000); // 3 seconds
+                }, 3000); 
 
             })
             .catch(function(error) {
                 console.error("Error saving user data: ", error);
-                // Here, you can implement a user feedback mechanism, e.g., display an error message
+
             });
     } else {
         console.log("No user is signed in.");
@@ -478,8 +493,8 @@ function displayMessage(message, type) {
 }
 
 
-    // Retrieve User Data on Login
-    function getUserProfile(uid) {
+
+function getUserProfile(uid) {
     firebase.database().ref('users/' + uid).once('value').then(function(snapshot) {
         var userData = snapshot.val();
         if (userData) {
