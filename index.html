@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
 
-    <!-- Firebase SDK -->
+
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
 
-    <!-- Font Icon and Main css -->
+
     <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -18,7 +18,7 @@
 <body>
 
     <div class="main">
-        <!-- Sing in Form -->
+
         <section class="sign-in">
             <div class="container">
                 <div class="signin-content">
@@ -60,7 +60,7 @@
             <span>Created by  ♛ Younes Benelhoms ♛.</span>
         </div>
     </footer>
-    <!-- Firebase Configuration and Sign-In Script -->
+
     <script>
        var firebaseConfig = {
         apiKey: "AIzaSyDs2gZJ6wIRDOqEtzyIT7toug3Xs3-_w1E",
@@ -84,51 +84,51 @@
         .then(function() {
             var user = firebase.auth().currentUser;
             if (user && user.emailVerified) {
-                // Redirect on successful sign-in
+
                 window.location.href = 'users.html';
             } else {
-                // User's email is not verified, show an error message
+
                 displayErrorMessage('Email not verified. Please verify your email before logging in.');
             }
         })
         .catch(function(error) {
-            // Create the message box element
+
             displayErrorMessage('Email or password incorrect');
         });
     });
 
     function displayErrorMessage(message) {
-        // Create the message box element
+
         var messageBox = document.createElement('div');
         messageBox.className = 'message-box';
 
-        // Add content to the message box
+
         var messageElement = document.createElement('p');
         messageElement.textContent = message;
         messageBox.appendChild(messageElement);
 
-        // Add a close button
+
         var closeButton = document.createElement('button');
         closeButton.textContent = 'Close';
         messageBox.appendChild(closeButton);
 
-        // Append the message box to the body
+
         document.body.appendChild(messageBox);
 
-        // Center the message box
+
         messageBox.style.top = '20%';
         messageBox.style.left = '50%';
         messageBox.style.transform = 'translateX(-50%)';
 
-        // Close button functionality
+
         closeButton.onclick = function() {
             document.body.removeChild(messageBox);
         };
     }
 </script>
 
-    <!-- External JS -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+
+<script src="vendor/jquery/jquery.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
