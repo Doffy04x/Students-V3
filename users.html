@@ -66,7 +66,7 @@
             margin-left: 1rem;
             margin-right: 1rem;
         }
-        /* Additional styles for the other users page */
+
         .user-profile {
             display: flex;
             align-items: center;
@@ -161,7 +161,7 @@
                     <option value="ENSET  ">ENSET  </option>
                     <option value="FST  ">FST  </option>
                 </select>
-                <!-- Filiere Dropdown -->
+
                 <select id="inputFiliere" class="form-control mr-2">
                     <option value="">Toutes les filliéres</option>
                     <option value="Informatique">Informatique</option>
@@ -172,7 +172,7 @@
                     <option value="Arabe">Arabe</option>  
                 </select>
         
-                <!-- Promotion Dropdown -->
+
                 <select id="inputPromotion" class="form-control mr-2">
                     <option value="">Toutes les promotions</option>
                     <option value="S1">S1</option>
@@ -202,17 +202,17 @@
             <span>Created by  ♛ Younes Benelhoms ♛.</span>
         </div>
     </footer>
-    <!-- Firebase Scripts -->
+
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
     <script>
 document.getElementById('signOutButton').addEventListener('click', function() {
     firebase.auth().signOut().then(function() {
-        // Sign-out successful, redirect to index.html
+
         window.location.href = 'index.html';
     }).catch(function(error) {
-        // An error happened during sign out
+
         console.error("Error signing out: ", error);
     });
 });
@@ -272,13 +272,13 @@ document.getElementById('signOutButton').addEventListener('click', function() {
 
     firebase.database().ref('users').once('value').then(function(snapshot) {
         const usersContainer = document.getElementById('usersContainer');
-        usersContainer.innerHTML = ''; // Clear previous results
+        usersContainer.innerHTML = ''; 
         snapshot.forEach(function(userSnapshot) {
             var userData = userSnapshot.val();
             if ((selectedFiliere === '' || userData.filiere === selectedFiliere) &&
                 (selectedPromotion === '' || userData.promotion === selectedPromotion)) {
-                // Create and append user profile elements here as before
-                var userDiv = document.createElement('div');
+
+                    var userDiv = document.createElement('div');
                 userDiv.className = 'user-profile';
                 userDiv.innerHTML = `
                     <img src="${userData.profileImageUrl || 'http://bootdey.com/img/Content/avatar/avatar1.png'}" alt="Profile Picture">
