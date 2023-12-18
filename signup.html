@@ -6,11 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sign Up </title>
 
-    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
 
-    <!-- Font Icon and Main css -->
     <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -18,14 +16,16 @@
 <body>
 
     <div class="main">
-        <!-- Sign up form -->
         <section class="signup">
             <div class="container">
                 <div class="signup-content">
                     <div class="signup-form">
                         <h2 class="form-title">Sign up</h2>
                         <form method="POST" class="register-form" id="register-form">
-                            
+                            <div class="form-group">
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="name" id="name" placeholder="Your Name"/>
+                            </div>
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
                                 <input type="email" name="email" id="email" placeholder="Your Email"/>
@@ -38,7 +38,10 @@
                                 <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
                                 <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
                             </div>
-                           
+                            <div class="form-group">
+                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term"  />
+                                <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                            </div>
                             <div class="form-group form-button">
                                 <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
                             </div>
@@ -58,7 +61,7 @@
             <span>Created by  ♛ Younes Benelhoms ♛.</span>
         </div>
     </footer>
-    <!-- Firebase Configuration and Registration Script -->
+
     <script>
          var firebaseConfig = {
             apiKey: "AIzaSyDs2gZJ6wIRDOqEtzyIT7toug3Xs3-_w1E",
@@ -79,55 +82,55 @@
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
 .then(function(userCredential) {
-    // Send email verification
+
     userCredential.user.sendEmailVerification()
     .then(function() {
-        // Email sent, show success message
+
         showMessage('Registration successful! Verification email sent.', 'success', function() {
             window.location.href = 'index.html';
         });
     })
     .catch(function(error) {
-        // Error occurred in sending email verification, show message
+
         showMessage('Error in sending verification email: ' + error.message, 'error');
     });
 })
 .catch(function(error) {
-    // Show error message box for registration failure
+
     showMessage('Registration failed: ' + error.message, 'error');
 });
 });
 
 function showMessage(message, type, callback) {
-    // Remove existing message box if any
+
     var existingBox = document.querySelector('.message-box');
     if (existingBox) {
         document.body.removeChild(existingBox);
     }
 
-    // Create the message box element
+
     var messageBox = document.createElement('div');
     messageBox.className = 'message-box';
 
-    // Add content to the message box
+
     var messageContent = document.createElement('p');
     messageContent.textContent = message;
     messageBox.appendChild(messageContent);
 
-    // Add a close button
+
     var closeButton = document.createElement('button');
     closeButton.textContent = 'Close';
     messageBox.appendChild(closeButton);
 
-    // Append the message box to the body
+
     document.body.appendChild(messageBox);
 
-    // Close button functionality
+
     closeButton.onclick = function() {
         document.body.removeChild(messageBox);
         if (typeof callback === 'function') {
-            callback(); // Call the callback function
-        }
+            callback(); 
+            }
     };
 }
 
@@ -135,8 +138,8 @@ function showMessage(message, type, callback) {
 
     </script>
 
-    <!-- External JS -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+
+<script src="vendor/jquery/jquery.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
