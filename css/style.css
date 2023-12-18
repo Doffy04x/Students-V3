@@ -616,9 +616,8 @@ label.valid {
   cursor: pointer;
 }
 
-.nav-borders .nav-link {
-  /* existing styles */
-}
+
+
 
 .btn-outline-danger {
   color: #dc3545;
@@ -649,9 +648,23 @@ label.valid {
   flex-wrap: wrap;
 }
 
+
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .footer .container {
       flex-direction: column;
   }
+}
+.nav-borders {
+  display: flex;
+  justify-content: center;
+  padding-left: 0; /* Remove default padding */
+  list-style: none; /* Remove list styling */
+  margin: 0; /* Remove default margin */
+}
+
+.nav-borders .nav-link {
+  /* Existing styles... */
+  margin-left: 10px; /* Adjust the spacing as needed */
+  margin-right: 10px; /* Adjust the spacing as needed */
 }
