@@ -105,16 +105,16 @@
 <body>
     <div class="container mt-4">
 
-        <nav class="nav nav-borders">
-            <a class="nav-link ms-0" href="account.html">Profile</a>
-            <a class="nav-link active" href="users.html">Autre Utilisateurs</a>
-           
+        <nav class="nav nav-borders justify-content-center">
+            <a class="nav-link " href="account.html">Profile</a>
+            <a class="nav-link ms-0  active" href="users.html">Autre Utilisateurs</a>
             <a class="nav-link" href="javascript:void(0);" id="signOutButton">Se déconnecter</a>
         </nav>
-        
 
 
+            <p></p>
         <nav class="nav nav-borders d-flex justify-content-between">
+
             <div class="d-flex justify-content-between w-100">
                 
             </div>
@@ -242,7 +242,7 @@ document.getElementById('signOutButton').addEventListener('click', function() {
                             <div class="user-info">
                                 <p><strong>Nom D'Utilisateur:</strong> ${userData.username || 'N/A'}</p>
                                 <p><strong>Nom complet:</strong> ${userData.firstName || ''} ${userData.lastName || ''}</p>
-                                <p><strong>Address Email:</strong> ${userData.Email || 'N/A'}</p>
+                                <p><strong>Address Email professionnel:</strong> ${userData.Email || 'N/A'}</p>
                                 <p><strong>Genre:</strong> ${userData.gender || 'N/A'}</p>
                                 <p><strong>Date de Naissance:</strong> ${userData.birthDate || 'N/A'}</p>
                                 <p><strong>Lieu de Naissance:</strong> ${userData.birthPlace || 'N/A'}</p>
@@ -299,7 +299,6 @@ document.getElementById('signOutButton').addEventListener('click', function() {
         console.log("Error fetching user data:", error);
     });
 });
-
 
     </script>
 </body>
