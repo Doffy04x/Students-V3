@@ -274,7 +274,7 @@ figure {
 
 .form-submit {
   display: inline-block;
-  background: #6dabe4;
+  background: #008000;
   color: #fff;
   border-bottom: none;
   width: auto;
@@ -575,8 +575,12 @@ label.valid {
     margin-left: 0px;
     padding: 0 30px; }
 
-  .form-title {
-    text-align: center; } }
+    .form-title {
+      font-family: 'Lora', serif;
+      font-weight: 500;
+      font-style: italic;
+      /* Other styling properties... */
+  }   }
 @media screen and (max-width: 400px) {
   .social-login {
     flex-direction: column;
